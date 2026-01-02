@@ -1,10 +1,10 @@
-import { CardInBattle } from "./cads";
+import type { CardInBattle } from './cads'
 
 export interface Player {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 export interface PlayerInBattle extends Player {
-  deck: CardInBattle[];
+  deck: Array<CardInBattle>
 }

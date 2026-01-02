@@ -276,23 +276,23 @@ function useBattle() {
     const { playerOne, playerTurnId, playerTwo, cardActive } = room
     if (!playerOne || !playerTwo || player.id !== playerTurnId) return
 
-    if (!'0123456789'.includes(cardActive?.value)) {
+    if (!'0123456789'.includes(String(cardActive?.value))) {
       nextTurn(cardActive!)
       return
     }
 
     const currentDeck = player.deck
     const replacedCard = currentDeck.find((card) => card.id === cardId)
+    if (!replacedCard) return
+    if (
+      replacedCard?.value === cardActive?.value &&
+      replacedCard?.status === CardBattleStatus.FRONT
+    )
+      return
     if (replacedCard?.status !== CardBattleStatus.BACK) {
       nextTurn(cardActive!)
       return
     }
-    if (!replacedCard) return
-    if (
-      replacedCard.value === cardActive?.value &&
-      replacedCard.status === CardBattleStatus.FRONT
-    )
-      return
 
     if (!cardActive) return
 
@@ -331,9 +331,9 @@ function useBattle() {
     if (room && room?.playerOne && room?.playerTwo) {
       const currentRoom = room
       currentRoom.playerTurnId =
-        currentRoom?.playerTurnId === currentRoom?.playerOne.id
-          ? currentRoom?.playerTwo.id
-          : currentRoom?.playerOne.id
+        currentRoom?.playerTurnId === (currentRoom?.playerOne?.id || '')
+          ? currentRoom?.playerTwo?.id || ''
+          : currentRoom?.playerOne?.id || ''
       currentRoom.turn = (currentRoom?.turn || 0) + 1
       currentRoom.lastCardsUsed = [
         cardtoLast,

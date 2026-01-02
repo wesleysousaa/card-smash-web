@@ -16,7 +16,7 @@ function Home() {
         yourPlayer: {
           ...prev.yourPlayer,
           name: e.target.value,
-          id: prev?.yourPlayer.id || '',
+          id: prev.yourPlayer?.id || '',
         },
       }
     })

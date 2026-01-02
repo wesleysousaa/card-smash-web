@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CardContainer, CardTitle } from './styles'
-import { CardBattleStatus, type CardInBattle } from '@/types/cads'
+import { type CardInBattle } from '@/types/cads'
 import { getCardColor, getCardDisplay } from '@/utils/card'
 import { useBattleContext } from '@/context/BattleContext'
 
