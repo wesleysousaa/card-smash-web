@@ -15,6 +15,9 @@ export const BattleContainer = styled.div<{ disableClicks?: boolean }>`
     `
     pointer-events: none;
   `}
+
+  height: 80%;
+  align-self: center;
 `
 
 export const ContainerCards = styled.div`
