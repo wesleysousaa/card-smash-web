@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom/client'
 import {
-  Outlet,
   RouterProvider,
   createRootRoute,
   createRoute,
@@ -8,7 +7,6 @@ import {
 } from '@tanstack/react-router'
 
 import './styles.css'
-import { AnimatePresence, motion } from 'framer-motion'
 import reportWebVitals from './reportWebVitals.ts'
 
 import Home from './pages/home/index.tsx'

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { v4 as uuid } from 'uuid'
 import type { Room } from '@/types/general'
 import type { PlayerInBattle } from '@/types/player'
 import type { CardInBattle } from '@/types/cads'

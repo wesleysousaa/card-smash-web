@@ -24,7 +24,6 @@ function Battle() {
   const {
     playerOne,
     playerTwo,
-    turn,
     setRoom,
     lastCardsUsed,
     drawCard,
