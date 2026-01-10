@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   Outlet,
@@ -9,6 +8,7 @@ import {
 } from '@tanstack/react-router'
 
 import './styles.css'
+import { AnimatePresence, motion } from 'framer-motion'
 import reportWebVitals from './reportWebVitals.ts'
 
 import Home from './pages/home/index.tsx'
@@ -16,11 +16,12 @@ import Lobby from './pages/lobby/index.tsx'
 import { Container } from './global-sx.style.ts'
 import { BattleProvider } from './context/BattleContext.tsx'
 import Battle from './pages/battle/index.tsx'
+import AnimatedOutlet from './containers/animated-layout/index.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
     <BattleProvider autoConnect>
-      <Outlet />
+      <AnimatedOutlet />
     </BattleProvider>
   ),
 })
@@ -64,11 +65,9 @@ const rootElement = document.getElementById('app')
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
-    <StrictMode>
-      <Container>
-        <RouterProvider router={router} />
-      </Container>
-    </StrictMode>,
+    <Container>
+      <RouterProvider router={router} />
+    </Container>,
   )
 }
 

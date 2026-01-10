@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
+import { v4 as uuid } from 'uuid'
 import type { Room } from '@/types/general'
 import type { PlayerInBattle } from '@/types/player'
 import type { CardInBattle } from '@/types/cads'
@@ -150,22 +151,25 @@ function useBattle() {
 
   const joinRoomWs = (roomId: string) => {
     const roomWs = getRoomById(roomId)
-    sendMessage({
-      action: 'join_room',
-      payload: {
-        roomId,
-        player: {
-          ...roomWs?.playerTwo,
-          id: room?.yourPlayer?.id,
-          name: room?.yourPlayer?.name,
-          deck:
-            roomWs?.playerTwo?.deck.map((item) => ({
-              ...item,
-              owner: room?.yourPlayer?.id,
-            })) || [],
+    const isWatcher = roomWs?.playerTwo?.id !== '-'
+    if (!isWatcher) {
+      sendMessage({
+        action: 'join_room',
+        payload: {
+          roomId,
+          player: {
+            ...roomWs?.playerTwo,
+            id: room?.yourPlayer?.id,
+            name: room?.yourPlayer?.name,
+            deck:
+              roomWs?.playerTwo?.deck.map((item) => ({
+                ...item,
+                owner: room?.yourPlayer?.id,
+              })) || [],
+          },
         },
-      },
-    })
+      })
+    }
     navigate({ to: '/battle/$roomId', params: { roomId } })
   }
 
@@ -365,7 +369,11 @@ function useBattle() {
         cardPlayer?.status === CardBattleStatus.BACK &&
         actualPlayer?.id === room?.yourPlayer?.id
       ) {
-        setRoom({ ...room, cardActive: lastCard })
+        setRoom({
+          ...room,
+          cardActive: lastCard,
+          lastCardsUsed: room.lastCardsUsed.slice(-1),
+        })
       }
     }
   }, [room?.lastCardsUsed])

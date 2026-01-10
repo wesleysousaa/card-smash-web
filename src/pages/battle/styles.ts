@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import { CardContainer } from '@/containers/card/styles'
 
 export const BattleContainer = styled.div<{ disableClicks?: boolean }>`
@@ -21,6 +21,7 @@ export const BattleContainer = styled.div<{ disableClicks?: boolean }>`
 `
 
 export const ContainerCards = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
@@ -28,6 +29,7 @@ export const ContainerCards = styled.div`
   padding: 8px;
   border-radius: 16px;
   padding-bottom: 0;
+  z-index: 1;
 `
 
 export const BattleBody = styled.div`
@@ -38,14 +40,6 @@ export const BattleBody = styled.div`
   width: 100%;
   height: 30%;
   gap: 23.3%;
-`
-
-export const TurnIndicator = styled.p`
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  width: 100%;
-  text-align: center;
 `
 
 export const Reservedrea = styled.div`
@@ -175,4 +169,93 @@ export const ParabensContent = styled.div`
     background: rgba(255, 255, 255, 0.18);
     color: #fff;
   }
+`
+
+const float = keyframes`
+  0%   { transform: translateY(0) }
+  50%  { transform: translateY(-3px) }
+  100% { transform: translateY(0) }
+`
+
+export const PlayerIndicator = styled.p<{
+  orientation: 'left' | 'right'
+}>`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+
+  padding: 12px 52px 12px 18px;
+  user-select: none;
+
+  animation: ${float} 3.8s ease-in-out infinite;
+  transform-style: preserve-3d;
+
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.9, 0.25, 1),
+    box-shadow 220ms ease;
+
+  /* brilho */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      120deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.28) 42%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0.28) 58%,
+      transparent 75%
+    );
+    transform: translateX(-140%) skewX(-22deg);
+  }
+
+  &:hover {
+    transform: translateY(-5px) rotateX(9deg);
+    box-shadow:
+      0 14px 34px rgba(0, 0, 0, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  }
+
+  ${(props) =>
+    props.orientation === 'left'
+      ? css`
+          align-self: flex-start;
+
+          /* formato recortado */
+          border-radius: 0 0 14px 4px;
+
+          background-color: #1e90ff;
+
+          clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+
+          transform: rotateY(6deg);
+        `
+      : css`
+          align-self: flex-end;
+
+          border-radius: 0 4px 14px 0;
+
+          background-color: #dc143c;
+
+          clip-path: polygon(8% 0, 100% 0, 100% 100%, 8% 100%, 0 50%);
+
+          transform: rotateY(-6deg);
+        `}
 `

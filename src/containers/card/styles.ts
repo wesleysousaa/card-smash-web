@@ -1,57 +1,19 @@
 import styled from 'styled-components'
 
-export const CardShadow = styled.div<{
-  customWidth?: string
-  dropDelay?: number
-}>`
-  margin-bottom: 12px;
-  border-radius: 16px;
-  overflow: visible;
-  flex-shrink: 0;
-  display: inline-block;
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
-  will-change: transform, box-shadow;
-  max-width: ${(props) => props.customWidth || '17%'};
-  min-width: ${(props) => props.customWidth || '17%'};
-  width: ${(props) => props.customWidth || '17%'};
-
-  /* drop-in animation when element is mounted */
-  transform: translateY(-48px);
-  opacity: 0;
-  animation: dropIn 480ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
-  animation-delay: ${(props) =>
-    props.dropDelay ? props.dropDelay + 'ms' : '0ms'};
-
-  @keyframes dropIn {
-    0% {
-      transform: translateY(-48px) rotate(-1.5deg);
-      opacity: 0;
-    }
-    60% {
-      transform: translateY(8px) rotate(0.8deg);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-    }
-  }
-
-  /* respect user preference for reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-    transform: none;
-    opacity: 1;
-  }
-`
-
 export const CardContainer = styled.button<{
   color: string
   isHighlighted?: boolean
   disableClick?: boolean
 }>`
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+
+  &:hover {
+    transform: translateY(-6px) rotateX(8deg);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  }
+  width: 100%;
   background-color: ${(props) => props.color};
   background-image: linear-gradient(
     135deg,
@@ -63,8 +25,7 @@ export const CardContainer = styled.button<{
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
-  height: 100px;
-  overflow: hidden;
+  height: 90px;
   border: ${(props) =>
     props.isHighlighted
       ? '2px solid rgba(255,255,255,0.22)'

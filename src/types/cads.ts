@@ -12,6 +12,7 @@ export interface Card {
   id: string
   value: string
   color: CardColor
+  uuid?: string
 }
 
 export interface CardInBattle extends Card {

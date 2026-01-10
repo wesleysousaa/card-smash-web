@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import type { Card } from '@/types/cads'
 import type { CardColor } from './colors'
 
@@ -12,6 +13,7 @@ export const GlobalDeck: Array<Card> = [
         id: `${color}-${number}`,
         value: `${number}`,
         color: color,
+        uuid: uuidv4(),
       }))
       return items
     })
@@ -22,6 +24,7 @@ export const GlobalDeck: Array<Card> = [
         id: `${color}-${card}`,
         value: `${card}`,
         color: color,
+        uuid: uuidv4(),
       }))
       return items
     })

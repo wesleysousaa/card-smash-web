@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import { CardContainer, CardTitle } from './styles'
-import { type CardInBattle } from '@/types/cads'
+import type { CardInBattle } from '@/types/cads'
 import { getCardColor, getCardDisplay } from '@/utils/card'
 import { useBattleContext } from '@/context/BattleContext'
+
+export const MotionCardContainer = motion(CardContainer)
 
 function Card({
   card,
@@ -23,7 +26,8 @@ function Card({
 
   const disableClick =
     (!isArenaCard && cardActive && index !== Number(cardActive.value)) ||
-    (card.owner !== playerTurnId && index !== undefined)
+    (card.owner !== playerTurnId && index !== undefined) ||
+    (cardActive?.value.includes('+') && !isArenaCard)
 
   useEffect(() => {
     if (
@@ -39,14 +43,27 @@ function Card({
   }, [card?.value])
 
   return (
-    <CardContainer
-      disableClick={disableClick}
-      color={getCardColor(card)}
-      onClick={onClick}
-      isHighlighted={isHighlighted}
+    <motion.div
+      layout
+      layoutId={card.uuid}
+      key={card.uuid}
+      drag={!disableClick}
+      dragSnapToOrigin
+      dragElastic
+      onDragEnd={onClick}
+      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
     >
-      <CardTitle valueChanged={valueChanged}>{getCardDisplay(card)}</CardTitle>
-    </CardContainer>
+      <MotionCardContainer
+        disableClick={disableClick}
+        color={getCardColor(card)}
+        onClick={onClick}
+        isHighlighted={isHighlighted}
+      >
+        <CardTitle valueChanged={valueChanged}>
+          {getCardDisplay(card)}
+        </CardTitle>
+      </MotionCardContainer>
+    </motion.div>
   )
 }
 
