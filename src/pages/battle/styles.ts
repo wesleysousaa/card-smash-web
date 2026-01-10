@@ -5,7 +5,7 @@ export const BattleContainer = styled.div<{ disableClicks?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  width: auto;
+  width: 100%;
   height: 100%;
   padding: 0 16px;
   justify-content: center;
