@@ -61,8 +61,8 @@ export const EmptySlot = styled.button<{ isHighlighted?: boolean }>`
   justify-content: center;
   align-items: center;
   padding: 8px 12px;
-  height: 70px;
-  width: 60px;
+  height: 60px;
+  width: 50px;
   overflow: hidden;
   border-width: 3px;
   border-color: #797979ff;

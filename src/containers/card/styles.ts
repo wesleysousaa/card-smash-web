@@ -5,7 +5,7 @@ export const CardContainer = styled.button<{
   isHighlighted?: boolean
   disableClick?: boolean
 }>`
-  width: 60px;
+  width: 50px;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;
@@ -25,7 +25,7 @@ export const CardContainer = styled.button<{
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
-  height: 70px;
+  height: 60px;
   border: ${(props) =>
     props.isHighlighted
       ? '2px solid rgba(255,255,255,0.22)'
