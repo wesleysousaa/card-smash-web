@@ -4,9 +4,8 @@ import { CardContainer } from '@/containers/card/styles'
 export const BattleContainer = styled.div<{ disableClicks?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   width: 100%;
-  height: 100%;
   padding: 0 16px;
   justify-content: center;
   margin: 0 auto;
@@ -16,7 +15,7 @@ export const BattleContainer = styled.div<{ disableClicks?: boolean }>`
     pointer-events: none;
   `}
 
-  height: 80%;
+  height: 60%;
   align-self: center;
 `
 
@@ -62,7 +61,8 @@ export const EmptySlot = styled.button<{ isHighlighted?: boolean }>`
   justify-content: center;
   align-items: center;
   padding: 8px 12px;
-  height: 90px;
+  height: 70px;
+  width: 60px;
   overflow: hidden;
   border-width: 3px;
   border-color: #797979ff;

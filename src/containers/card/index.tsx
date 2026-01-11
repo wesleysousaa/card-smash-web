@@ -52,6 +52,11 @@ function Card({
       dragElastic
       onDragEnd={onClick}
       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+      style={{
+        display: 'flex',
+        flex: 1,
+        width: '100%',
+      }}
     >
       <MotionCardContainer
         disableClick={disableClick}

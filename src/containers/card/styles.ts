@@ -5,6 +5,7 @@ export const CardContainer = styled.button<{
   isHighlighted?: boolean
   disableClick?: boolean
 }>`
+  width: 60px;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;
@@ -13,7 +14,6 @@ export const CardContainer = styled.button<{
     transform: translateY(-6px) rotateX(8deg);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
   }
-  width: 100%;
   background-color: ${(props) => props.color};
   background-image: linear-gradient(
     135deg,
@@ -25,7 +25,7 @@ export const CardContainer = styled.button<{
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
-  height: 80px;
+  height: 70px;
   border: ${(props) =>
     props.isHighlighted
       ? '2px solid rgba(255,255,255,0.22)'
